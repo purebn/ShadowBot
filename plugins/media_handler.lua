@@ -1,24 +1,16 @@
-local function callback(extra, success, result)
-  if success then
-    print('File downloaded to:', result)
-  else
-    print('Error downloading: '..extra)
-  end
-end
-
 local function run(msg, matches)
   if msg.media then
     if msg.media.type == 'document' then
-      load_document(msg.id, callback, msg.id)
+      print('Document file')
     end
     if msg.media.type == 'photo' then
-      load_photo(msg.id, callback, msg.id)
+      print('Photo file')
     end
     if msg.media.type == 'video' then
-      load_video(msg.id, callback, msg.id)
+      print('Video file')
     end
     if msg.media.type == 'audio' then
-      load_audio(msg.id, callback, msg.id)
+      print('Audio file')
     end
   end
 end
@@ -31,8 +23,8 @@ local function pre_process(msg)
 end
 
 return {
-  description = "When bot receives a media msg, download the media.",
-  usage = "",
+  description = "Media handler.",
+  usage = "Bot media handler, no usage.",
   run = run,
   patterns = {
     '%[(document)%]',
@@ -40,5 +32,6 @@ return {
     '%[(video)%]',
     '%[(audio)%]'
   },
+  hide = true,
   pre_process = pre_process
 }
